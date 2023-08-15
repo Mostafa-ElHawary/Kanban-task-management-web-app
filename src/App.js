@@ -1,39 +1,30 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Header from "./components/Header";
-import Home from "./components/Home";
-import EmptyBoard from './components/EmptyBoard';
-import boardsSlice from "./redux/boardsSlice";
+import React from "react";
+import GlobalStyle from "./globalStyle";
+
+import { Hstyle, Cont } from "./localStyle";
 
 function App() {
-  const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
-  const dispatch = useDispatch();
-  const boards = useSelector((state) => state.boards);
-  const activeBoard = boards.find((board) => board.isActive);
-  if (!activeBoard && boards.length > 0)
-    dispatch(boardsSlice.actions.setBoardActive({ index: 0 }));
   return (
-    <div className=" overflow-hidden  overflow-x-scroll">
-      <>
-        {boards.length > 0 ?
-        <>
-        <Header
-          setIsBoardModalOpen={setIsBoardModalOpen}
-          isBoardModalOpen={isBoardModalOpen}
-        />
-        <Home
-          setIsBoardModalOpen={setIsBoardModalOpen}
-          isBoardModalOpen={isBoardModalOpen}
-        />
-        </>
-        :
-        <>
-          <EmptyBoard type='add'/>
-        </>
-      }
-        
-      </>
-    </div>
+    <>
+      <GlobalStyle />
+
+      <Cont
+        style={{ height: "100vh", display: "grid", "align-items": "center" }}
+      >
+        <Hstyle
+          style={{
+            color: "rgb(94, 94, 94)",
+            "text-align": "center",
+          }}
+        >
+          Welcome to{" "}
+          <span style={{ color: "rgb(76, 227, 160)" }}>
+            Kanban task management web app
+          </span>{" "}
+          This app is under construction ..
+        </Hstyle>
+      </Cont>
+    </>
   );
 }
 
